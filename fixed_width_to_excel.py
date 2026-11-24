@@ -335,7 +335,7 @@ def polish_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         s = re.sub(r"\s{2,}", " ", s)
         return s
 
-    return df.applymap(clean_cell)
+    return df.map(clean_cell) if hasattr(pd.DataFrame, "map") else df.applymap(clean_cell)  # applymap was removed in pandas 3
 
 
 def style_excel(out_path: str):
